@@ -8,9 +8,6 @@ public class DoublyLinkedList {
     private HistoryNode tail = null;
     private int size = 0;
 
-    public DoublyLinkedList() {
-    }
-
     public boolean isEmpty() {
         return size == 0;
     }
@@ -131,6 +128,40 @@ public class DoublyLinkedList {
         size--;
 
         return node;
+    }
+
+    public boolean contains(HistoryNode node) {
+        for (HistoryNode curr = head; curr != null; curr = curr.getNext()) {
+            if (curr == node) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void insertAfter(HistoryNode anchor, HistoryNode node) {
+        HistoryNode after = anchor.getNext();
+        node.setPrev(anchor);
+        node.setNext(after);
+        anchor.setNext(node);
+        if (after == null) {
+            tail = node;          
+        } else {
+            after.setPrev(node);
+        }
+        size++;
+    }
+
+    public void insertFirst(HistoryNode node) {
+        node.setPrev(null);
+        node.setNext(head);
+        if (head == null) {
+            tail = node;
+        } else {
+            head.setPrev(node);
+        }
+        head = node;
+        size++;
     }
 
     public void clear() {

@@ -11,51 +11,32 @@ public class DeletedHistoryStack {
         size = 0;
     }
 
-    public void push(String url) {
-        HistoryNode newNode = new HistoryNode(url);
-
-        if (top != null) {
-            top.setPrev(newNode);
-            newNode.setNext(top);
+    public void push(HistoryNode node) {
+        if (node == null) {
+            throw new IllegalArgumentException("Cannot push a null page.");
         }
-
-        top = newNode;
+        node.setNext(top);
+        top = node;
         size++;
     }
 
-    public String pop() {
-        if (top == null)
+    public HistoryNode pop() {
+        if (top == null) {
             return null;
-
-        HistoryNode node = top;
-
-        if (node.getNext() == null) {
-            top = null;
-        } else {
-            top = node.getNext();
-            top.setPrev(null);
         }
-
+        HistoryNode node = top;
+        top = node.getNext();       
         node.setNext(null);
-        node.setPrev(null);
-
         size--;
-
-        return node.getUrl();
+        return node;
     }
 
-    public String peek() {
-        if (top == null)
-            return null;
-
-        return top.getUrl();
+    public HistoryNode peek() {
+        return top;
     }
 
     public boolean isEmpty() {
-        if (size != 0)
-            return false;
-
-        return true;
+        return size==0;
     }
 
     public int getSize() {

@@ -1,9 +1,12 @@
 package models;
 
+import java.util.Date;
+
 public class HistoryNode {
     private HistoryNode prev = null;
     private HistoryNode next = null;
     private String url;
+    private Date visitedAt = new Date();
 
     public HistoryNode(HistoryNode prev, String url, HistoryNode next) {
         this.prev = prev;
@@ -37,5 +40,9 @@ public class HistoryNode {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Date getVisitedAt() {
+        return visitedAt;
     }
 }

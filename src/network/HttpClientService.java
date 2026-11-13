@@ -11,7 +11,7 @@ import java.util.Map;
 import models.HttpRequestData;
 import models.HttpResponseData;
 
-public class HttpClientService {
+public class    HttpClientService {
     private HttpClient client;
 
     public HttpClientService() {
